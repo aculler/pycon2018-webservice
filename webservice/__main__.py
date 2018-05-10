@@ -13,7 +13,7 @@ router = routing.Router()
 async def pull_request_closed_event(event, gh, *args, **kwargs):
     from pprint import pprint
     pprint(event.data)
-    merged = event.data['merged']
+    merged = event.data['pull_request']['merged']
     if merged:
         url = event.data['pull_request']['comments_url']
         author = event.data['pull_request']['user']['login']
