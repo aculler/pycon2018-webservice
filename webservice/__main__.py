@@ -9,7 +9,7 @@ from gidgethub import aiohttp as gh_aiohttp
 router = routing.Router()
 
 
-@router.register('pull_request', action='created')
+@router.register('pull_request', action='opened')
 async def pull_request_created_event(event, gh, *args, **kwargs):
     url = event.data['url']
     await gh.patch(
