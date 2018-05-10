@@ -11,7 +11,7 @@ router = routing.Router()
 
 @router.register('pull_request', action='opened')
 async def pull_request_created_event(event, gh, *args, **kwargs):
-    url = event.data['url']
+    url = event.data['pull_request']['url']
     await gh.patch(
         url,
         data={'labels': ['needs review']}
