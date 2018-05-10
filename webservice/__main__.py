@@ -32,7 +32,7 @@ async def main(request):
     )
 
     async with aiohttp.ClientSession() as session:
-        gh = gh_aiohttp.GetHubAPI(
+        gh = gh_aiohttp.GitHubAPI(
             session,
             'adc4392',
             oauth_token=oauth_token
