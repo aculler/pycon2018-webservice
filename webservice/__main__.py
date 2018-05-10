@@ -9,10 +9,20 @@ from gidgethub import aiohttp as gh_aiohttp
 router = routing.Router()
 
 
+@router.register('issue_comment', action='created')
+async def issue_comment_created(event, gh, *args, **kwargs):
+    commentor = event.data['issue']['user']['login']
+    if commentor == 'adc4392':
+        url = '{}/reactions'.format(event.data['comment']['url']
+        await gh.post(
+            url, 
+            data={'body': 'content': 'hooray'}, 
+            accept='application/vnd.github.squirrel-girl-preview+json'
+        )
+
+
 @router.register('pull_request', action='closed')
 async def pull_request_closed_event(event, gh, *args, **kwargs):
-    from pprint import pprint
-    pprint(event.data)
     merged = event.data['pull_request']['merged']
     if merged:
         url = event.data['pull_request']['comments_url']
