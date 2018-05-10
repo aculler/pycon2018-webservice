@@ -13,7 +13,7 @@ router = routing.Router()
 async def issue_comment_created(event, gh, *args, **kwargs):
     commentor = event.data['issue']['user']['login']
     if commentor == 'adc4392':
-        url = '{}/reactions'.format(event.data['comment']['url']
+        url = '{}/reactions'.format(event.data['comment']['url'])
         await gh.post(
             url, 
             data={'body': 'content': 'hooray'}, 
