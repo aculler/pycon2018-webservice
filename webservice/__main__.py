@@ -11,6 +11,8 @@ router = routing.Router()
 
 @router.register('pull_request', action='closed')
 async def pull_request_closed_event(event, gh, *args, **kwargs):
+    from pprint import pprint
+    pprint(event.data)
     merged = event.data['merged']
     if merged:
         url = event.data['pull_request']['comments_url']
