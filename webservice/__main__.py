@@ -16,7 +16,7 @@ async def issue_comment_created(event, gh, *args, **kwargs):
         url = '{}/reactions'.format(event.data['comment']['url'])
         await gh.post(
             url, 
-            data={'body': 'content': 'hooray'}, 
+            data={'content': 'hooray'}, 
             accept='application/vnd.github.squirrel-girl-preview+json'
         )
 
