@@ -9,6 +9,17 @@ from gidgethub import aiohttp as gh_aiohttp
 router = routing.Router()
 
 
+@router.register('pull_request', action='closed')
+async def pull_request_closed_event(event, gh, *args, **kwargs):
+    merged = event.data['merged']
+    if merged:
+        url = event.data['pull_request']['comments_url']
+        author = event.data['pull_request']['user']['login']
+
+        message = f'Thanks for contributing @{author}! Your changes have been merged.'
+        await gh.post(url, data={'body': message})
+
+
 @router.register('issues', action='opened')
 async def issue_opened_event(event, gh, *args, **kwargs):
     """Whenever an issue is opened, greet the author and say thanks."""
